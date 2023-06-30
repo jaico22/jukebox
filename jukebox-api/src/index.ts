@@ -5,19 +5,19 @@ import helmet from "helmet"
 import http from 'http'
 
 import developerAuthRouter from "./auth/apple/developer/developer.controller"
-import queueController from "./queue/queue.controller";
 
 dotenv.config();
+if (process.env.NODE_ENV === "local") {
+  dotenv.config({ path: `.env.local`, override: true });
+}
 
 if (!process.env.PORT) {
-    process.exit(1);
+  process.exit(1);
 }
 
 const PORT: number = parseInt(process.env.PORT as string, 10);
 
-const corsOptions = {
-  origin: "http://localhost:3000"
-};
+const corsOptions = {};
 
 const app = express();
 const server = http.createServer(app);
@@ -27,7 +27,6 @@ app.use(helmet());
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use("/api/auth/apple/developer", developerAuthRouter);
-app.use("/api/queue", queueController)
 
 // Initialize web sockets for group sessions
 require('./socket').init(server); 

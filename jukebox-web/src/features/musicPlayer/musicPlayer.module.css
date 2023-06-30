@@ -1,0 +1,48 @@
+@import "./../../vars.css";
+
+.container {
+    flex-basis: 30%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em
+}
+
+.albumImgContianer {
+    width: 100%;
+}
+
+.albumImg {
+    width: 100%;
+}
+
+.albumImgUnderlay {
+    height: 100%;
+    width: 100%;
+    filter: blur(50px);
+    position: absolute;
+    opacity: 20%;
+    z-index: -10;
+    left: 0;
+    top: 0;
+}
+
+.controls {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.control {
+    font-size: 3em;
+    opacity: 40%;
+}
+
+.control:hover {
+    opacity: 100%;
+}
+
+.songName {
+    font-size: 2em;
+}

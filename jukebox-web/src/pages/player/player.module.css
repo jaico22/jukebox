@@ -1,0 +1,13 @@
+@import './../../vars.css';
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4em;
+    margin-top: 2em;
+}
+
+.queueContainer {
+    flex-basis: 50%;
+}

@@ -1,0 +1,31 @@
+# .github/workflows/deploy.yml
+name: Copy Api to External Repo
+
+on:
+  # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
+  #  push:
+  #    branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Deploy to external repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.JUKE_BOX_WEB_REPO_PAT }}
+
+        with:
+          # GitHub Action output files
+          source-directory: jukebox-api/
+          destination-github-username: jaico22
+          destination-repository-name: jukebox-api
+          user-email: admin@harmoni.app
+
+      - name: Test get variable exported by push-to-another-repository
+        run: echo $DESTINATION_CLONED_DIRECTORY
