@@ -3,6 +3,7 @@ import { useMusicPlayer } from "../../../features/musicPlayer/hooks/useMusicPlay
 import { useDispatch } from "react-redux";
 import { setMusicPlayer } from "../../../features/musicPlayer/musicPlayerSlice";
 import { MusicPlayerType } from "../../../features/musicPlayer/models/MusicPlayerType";
+import styles from "./logincomponents.module.css"
 
 type AppleMusicLoginProps = {
     successCallback: () => void
@@ -22,7 +23,7 @@ const AppleMusicLogin = (props: AppleMusicLoginProps) => {
         })
     }, [musicPlayer, props])
 
-    return <><button onClick={login}>Login to Apple Music</button></>
+    return <><img onClick={login} className={styles.signInIcon} src="Apple_Music_icon.svg.png" alt="Apply Music Signin"/></>
 }
 
 export default AppleMusicLogin

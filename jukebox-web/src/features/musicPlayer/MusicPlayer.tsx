@@ -29,7 +29,7 @@ const MusicPlayer = () => {
         musicPlayer?.previous();
     }
     
-    const albumCoverUrl = musicPlayerState.nowPlaying?.albumCoverUrl.replace('{w}', '300').replace('{h}', '300');
+    const albumCoverUrl = musicPlayerState.nowPlaying?.albumCoverUrl.replace('{w}', '600').replace('{h}', '600');
     return (<div className={styles.container}>
         <div className={styles.albumImgContianer}>
             <img src={albumCoverUrl} className={styles.albumImg} />
