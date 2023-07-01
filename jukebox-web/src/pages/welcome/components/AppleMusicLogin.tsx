@@ -23,7 +23,7 @@ const AppleMusicLogin = (props: AppleMusicLoginProps) => {
         })
     }, [musicPlayer, props])
 
-    return <><img  onClick={login} className={styles.signInIcon} src="Apple_Music_icon.svg.png" /></>
+    return <><img onClick={login} className={styles.signInIcon} src="Apple_Music_icon.svg.png" alt="Apply Music Signin"/></>
 }
 
 export default AppleMusicLogin
