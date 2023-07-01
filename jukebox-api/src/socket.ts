@@ -5,7 +5,6 @@ let io: any;
 
 module.exports = {
     init: (httpServer : any) => {
-        console.log("init websocket")
         io = require('socket.io')(httpServer);
         io.on('error', (err: any) => console.log('error', err));
         io.on("connection", (socket: Socket) => {
