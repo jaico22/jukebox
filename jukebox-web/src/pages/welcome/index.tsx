@@ -5,6 +5,7 @@ import routes from "../routes";
 import GuestLogin from "./components/GuestLogin";
 import { useDispatch } from "react-redux";
 import { setIsGuest } from "../../features/groupSessions/groupSessionSlice";
+import styles from "./welcome.module.css"
 
 const WelcomePage = () => {
     const navigate = useNavigate();
@@ -19,10 +20,21 @@ const WelcomePage = () => {
         navigate(routes.guest)
     }
 
-    return (<div>
-        <b>Welcome<br /><AppleMusicLogin successCallback={handleLoginSuccess} /></b> <br />
-        <p>- or -</p>
-        <GuestLogin successCallback={handleGuestLoginSucces} />
+    return (
+    <div className={styles.content}>
+        <div className={styles.header}>
+            <h1>Harmoni</h1>
+        </div>
+        <div className={styles.loginOptionsContainer}>
+            <span><i>Select your platform to begin</i></span>
+            <div className={styles.loginOptionsList}>
+            <AppleMusicLogin successCallback={handleLoginSuccess} /> 
+            </div>
+        </div>
+        <div className={styles.loginOptionsContainer}>
+            <span><i>Or Join a Live Session</i></span>
+            <GuestLogin successCallback={handleGuestLoginSucces} />
+        </div>
     </div>)
 }
 

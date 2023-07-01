@@ -10,7 +10,6 @@ export class DeveloperService implements IDeveloperService {
         const issuedAt = new Date();
         const expiresAt = new Date(issuedAt.getTime())
         expiresAt.setDate(expiresAt.getDate() + 1);
-        console.log(process.env.APPLE_DEV_KEY)
         const privateKey = Buffer.from(process.env.APPLE_DEV_KEY as string, 'base64');
         const keyId = process.env.APPLE_DEV_KEY_ID as string;
 
