@@ -29,13 +29,17 @@ const MusicPlayer = () => {
         musicPlayer?.previous();
     }
     
-    const albumCoverUrl = musicPlayerState.nowPlaying?.albumCoverUrl.replace('{w}', '600').replace('{h}', '600');
+    const nowplayingItem = musicPlayerState.nowPlaying ?? musicPlayerState.queue?.at(0);
+
+    const albumCoverUrl = nowplayingItem?.albumCoverUrl.replace('{w}', '600').replace('{h}', '600');
+
+
     return (<div className={styles.container}>
         <div className={styles.albumImgContianer}>
             <img src={albumCoverUrl} className={styles.albumImg} />
             <img src={albumCoverUrl} className={styles.albumImgUnderlay} />
         </div>
-        <span className={styles.songName}>{musicPlayerState.nowPlaying?.name ?? "None"}</span>
+        <span className={styles.songName}>{nowplayingItem?.name ?? "None"}</span>
         <div className={styles.controls}>
             <FontAwesomeIcon icon={faSquareCaretLeft} onClick={previous} className={styles.control} />
             {!musicPlayerState.isPlaying && (<FontAwesomeIcon icon={faCirclePlay} onClick={playMusic} className={styles.control} />)}
