@@ -21,6 +21,8 @@ const corsOptions = {
   origin: process.env.CORS_ALLOWED_ORIGINS?.split(',')
 };
 
+console.log(`CORS: ${JSON.stringify(corsOptions)}`)
+
 const app = express();
 const server = http.createServer(app);
 
