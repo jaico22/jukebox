@@ -17,7 +17,9 @@ if (!process.env.PORT) {
 
 const PORT: number = parseInt(process.env.PORT as string, 10);
 
-const corsOptions = {};
+const corsOptions = {
+  origin: process.env.CORS_ALLOWED_ORIGINS?.split(',')
+};
 
 const app = express();
 const server = http.createServer(app);
