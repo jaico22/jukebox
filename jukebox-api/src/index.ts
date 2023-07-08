@@ -5,6 +5,7 @@ import helmet from "helmet"
 import http from 'http'
 
 import developerAuthRouter from "./auth/apple/developer/developer.controller"
+import sessionsRouter from "./sessions/sessions.controller"
 
 dotenv.config();
 if (process.env.NODE_ENV === "local") {
@@ -27,6 +28,7 @@ app.use(helmet());
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use("/api/auth/apple/developer", developerAuthRouter);
+app.use("/api/sessions", sessionsRouter);
 
 // Initialize web sockets for group sessions
 require('./socket').init(server); 

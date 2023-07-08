@@ -1,0 +1,25 @@
+@import "./../../../vars.css";
+
+
+.controlGroup {
+    display: flex;
+    flex-direction: column;
+    margin: 1em 0 1em 0;
+    width: 100%;
+}
+
+.inputContainer {
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+}
+
+.checkbox {
+    font-size: 1em;
+    color: green;
+}
+
+.error {
+    font-size: 1em;
+    color: red
+}

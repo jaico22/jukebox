@@ -6,6 +6,7 @@ import { useGroupSession } from "../groupSessions/hooks/useGroupSession";
 import styles from "./musicPlayer.module.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquareCaretLeft, faCirclePlay, faSquareCaretRight, faCirclePause } from '@fortawesome/free-solid-svg-icons'
+import SessionController from "../sessionController/SessionController";
   
 const MusicPlayer = () => {
     const musicPlayerState = useSelector((state: RootState) => state.musicPlayer);
@@ -41,6 +42,7 @@ const MusicPlayer = () => {
             {!musicPlayerState.isPlaying && (<FontAwesomeIcon icon={faCirclePlay} onClick={playMusic} className={styles.control} />)}
             {musicPlayerState.isPlaying && (<FontAwesomeIcon icon={faCirclePause} onClick={pause} className={styles.control} />)}
             <FontAwesomeIcon icon={faSquareCaretRight} onClick={skip} className={styles.control} />
+            <SessionController className={styles.control}/>
         </div>
 
         <i>Group Session Id: {(groupSession?.groupSessionId)}</i>

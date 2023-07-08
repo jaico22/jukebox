@@ -1,0 +1,42 @@
+@import "./../../vars.css";
+
+.overlay {
+
+}
+
+.modal {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+}
+
+.modalBody {
+    width: 100%;
+    max-width: 800px;
+    padding: 2em;
+    background-color: var(--color-dark-secondary);
+    border-radius: 1em;
+}
+
+.modalHeader {
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    height: 0;
+    margin-top: -1em; 
+}
+
+.closeIcon {
+    opacity: 0.70;
+    height: 2em;
+}
+
+.closeIcon:hover {
+    opacity: 1;
+    cursor: pointer;
+}

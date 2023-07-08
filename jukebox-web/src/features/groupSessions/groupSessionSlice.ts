@@ -6,10 +6,12 @@ interface GropSessionState {
     sessionId?: string;
     readOnlyQueue?: Song[];
     isGuest?: boolean;
+    isSessionActive: boolean;
 }
 
 const initialState: GropSessionState = {
-    isConnected: false
+    isConnected: false,
+    isSessionActive: false
 }
 
 export const groupSessionSlice = createSlice({
@@ -27,10 +29,13 @@ export const groupSessionSlice = createSlice({
         },
         setIsGuest: (state, action: PayloadAction<boolean>) => {
             state.isGuest = action.payload
+        },
+        setIsSessionActive: (state, action: PayloadAction<boolean>) => {
+            state.isSessionActive = action.payload
         }
     }
 })
 
-export const { setSessionId, setIsConnected, setQueue, setIsGuest } = groupSessionSlice.actions;
+export const { setSessionId, setIsConnected, setQueue, setIsGuest, setIsSessionActive } = groupSessionSlice.actions;
 
 export default groupSessionSlice.reducer;

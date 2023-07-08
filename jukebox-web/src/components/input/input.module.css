@@ -1,0 +1,19 @@
+.input {
+    max-width: 90%;
+    width: 200px;
+    font-size: 1em;
+    border: 0;
+    border-radius: 0.5em;
+    padding: 0.25em; 
+    color: #fff;
+    background-color: var(--color-dark-primary);
+    box-sizing: border-box;
+}
+.input:hover {
+    box-shadow: 0px 0px 5px var(--color-light);
+}
+.label {
+    font-size: 1em;
+    margin-right: 0.5em;
+    font-weight: bold;
+}

@@ -5,6 +5,7 @@ import { setMusicPlayer } from "../../../features/musicPlayer/musicPlayerSlice";
 import { setSessionId as setGroupSessionId } from "../../../features/groupSessions/groupSessionSlice"
 import { socket } from "../../../socket";
 import styles from "./logincomponents.module.css"
+import Input from "../../../components/input";
 
 type Props = {
     successCallback: () => void
@@ -27,8 +28,12 @@ const GuestLogin = (props: Props) => {
         props.successCallback();
     }
     return (
-        <p>
-            <input className={styles.sessionInput} value={sessionId} onChange={(event) => setSesstionId(event.target.value)} placeholder="Session Id..."></input>
+        <p className={styles.sessionInputContainer}>
+            <Input 
+                setValue={(v) => setSesstionId(v)} 
+                value={sessionId} placeholder="Session Id..." 
+                fontSize="2em"
+            />
             <button className={styles.sessionInputConfirm} onClick={joinSession}>Go</button>
         </p>
     )
