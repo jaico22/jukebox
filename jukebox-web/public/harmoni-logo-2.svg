@@ -6,7 +6,7 @@
    version="1.1"
    id="svg1022"
    inkscape:version="1.2.2 (b0a84865, 2022-12-01)"
-   sodipodi:docname="harmoni-logo.svg"
+   sodipodi:docname="harmoni-logo-2.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -23,9 +23,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="446.42857"
-     inkscape:cy="442.85714"
+     inkscape:zoom="0.93544602"
+     inkscape:cx="276.87327"
+     inkscape:cy="72.692596"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -99,11 +99,10 @@
          id="tspan896"
          x="58.798"
          y="152.52449"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30.8642px;font-family:'Segoe Print';-inkscape-font-specification:'Segoe Print, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#d22828;fill-opacity:1;stroke-width:0.771608">armoni</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30.8642px;font-family:Helvetica;-inkscape-font-specification:Helvetica;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#d22828;fill-opacity:1;stroke-width:0.771608">armoni</tspan></text>
     <path
-       style="display:inline;fill:#d22828;fill-opacity:1;stroke:none;stroke-width:0.526969px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 19.668373,122.90832 c 45.168357,0.156 131.820457,10.17669 131.820457,10.17669 0,0 12.2711,2.13851 15.36703,7.74676 3.09595,5.60821 1.04688,3.08624 1.04688,3.08624 0,0 -1.76127,-8.56876 -20.04184,-10.64697 -13.73628,-1.56157 -43.59443,-3.32972 -87.203336,-5.64827 -42.57955,-2.26385 -42.57955,-2.26385 -42.57955,-2.26385 z"
-       id="path900"
-       sodipodi:nodetypes="ccscsscc" />
+       style="fill:#d22828;stroke-width:0.264583;fill-opacity:1"
+       d="m 16.171249,119.63104 c 0,0 37.970564,-10.84873 94.663941,2.27473 56.69338,13.12347 55.46852,12.59853 55.46852,12.59853 l -63.3426,-11.72363 c 0,0 -32.721177,-7.34914 -86.789861,-3.14963 z"
+       id="path436" />
   </g>
 </svg>
