@@ -1,7 +1,6 @@
 import { Socket } from "socket.io";
-import { DefaultEventsMap } from "socket.io/dist/typed-events";
-import ISocketReceiver from "../ISocketReceiver";
-import { QueueSongPayload } from "./models/QueueSongPayload";
+import ISocketReceiver from "../ISocketReceiver.js";
+import { QueueSongPayload } from "./models/QueueSongPayload.js";
 
 class QueueNextSocketReceiver implements ISocketReceiver {
     MessageId: string;

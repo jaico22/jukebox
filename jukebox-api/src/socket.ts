@@ -1,11 +1,13 @@
-import { Socket } from "socket.io";
-import ISocketReceiver from "./ISocketReceiver";
+import { Socket, Server } from "socket.io";
+import ISocketReceiver from "./ISocketReceiver.js";
+import { readdir } from "fs/promises";
+import { resolve } from "path";
 
 let io: any;
 
-module.exports = {
+const socket = {
     init: (httpServer : any) => {
-        io = require('socket.io')(httpServer);
+        io = new Server(httpServer);
         io.on('error', (err: any) => console.log('error', err));
         io.on("connection", (socket: Socket) => {
             console.log(`New connection: ${socket.id}`);
@@ -25,14 +27,17 @@ async function registerSocketReceivers(socket : Socket): Promise<void>
 {    
     for await (const file of getFiles('.')) {
         if (file.endsWith('.socketReceiver.ts')) {
-          const receiver = require(file).default as ISocketReceiver;
-          socket.on(receiver.MessageId, (arg) => receiver.ReceiveMessage(socket, arg))
+          try {
+            const receiver = (await import(file)) as ISocketReceiver;
+            socket.on(receiver.MessageId, (arg: any) => receiver.ReceiveMessage(socket, arg))
+          } catch (ex) {
+            // Ignore exceptions from trying to read typescript files. 
+            if (!file.endsWith('.ts'))
+                throw ex;
+          }
         }
     }
 }
-
-const { resolve } = require('path');
-const { readdir } = require('fs').promises;
 
 async function* getFiles(dir: string) : AsyncGenerator<string, any, undefined> {
   const dirents = await readdir(dir, { withFileTypes: true });
@@ -45,3 +50,5 @@ async function* getFiles(dir: string) : AsyncGenerator<string, any, undefined> {
     }
   }
 }
+
+export default socket;

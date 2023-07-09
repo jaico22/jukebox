@@ -1,7 +1,7 @@
 import { Socket } from "socket.io";
-import ISocketReceiver from "../ISocketReceiver";
-import { QueueChangePayload } from "./models/QueueChangedPayload";
-import { QueueSyncPayload } from "./models/QueueSyncPayload";
+import ISocketReceiver from "../ISocketReceiver.js";
+import { QueueChangePayload } from "./models/QueueChangedPayload.js";
+import { QueueSyncPayload } from "./models/QueueSyncPayload.js";
 
 class QueueSocketReceiver implements ISocketReceiver {
     public MessageId: string;

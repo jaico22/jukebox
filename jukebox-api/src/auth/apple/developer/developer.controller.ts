@@ -1,6 +1,6 @@
 import express from "express";
-import { DeveloperService } from "./developer.service";
-import { IDeveloperService } from "./ideveloperService.interface";
+import { DeveloperService } from "./developer.service.js";
+import { IDeveloperService } from "./ideveloperService.interface.js";
 
 const router = express.Router()
 

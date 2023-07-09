@@ -3,9 +3,10 @@ import express from "express"
 import cors from "cors"
 import helmet from "helmet"
 import http from 'http'
+import socket from "./socket.js"
 
-import developerAuthRouter from "./auth/apple/developer/developer.controller"
-import sessionsRouter from "./sessions/sessions.controller"
+import developerAuthRouter from "./auth/apple/developer/developer.controller.js"
+import sessionsRouter from "./sessions/sessions.controller.js"
 
 dotenv.config();
 if (process.env.NODE_ENV === "local") {
@@ -18,7 +19,11 @@ if (!process.env.PORT) {
 
 const PORT: number = parseInt(process.env.PORT as string, 10);
 
-const corsOptions = {};
+const corsOptions = {
+  origin: process.env.CORS_ALLOWED_ORIGINS?.split(',')
+};
+
+console.log(`CORS: ${JSON.stringify(corsOptions)}`)
 
 const app = express();
 const server = http.createServer(app);
@@ -31,8 +36,10 @@ app.use("/api/auth/apple/developer", developerAuthRouter);
 app.use("/api/sessions", sessionsRouter);
 
 // Initialize web sockets for group sessions
-require('./socket').init(server); 
+socket.init(server); 
 
 server.listen(PORT, () => {
   console.log(`listening on *:${PORT}`);
 });
+
+export {}
