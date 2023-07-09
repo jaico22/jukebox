@@ -1,6 +1,6 @@
 import { Socket } from "socket.io";
-import ISocketReceiver from "../ISocketReceiver";
-import { JoinSessionPayload } from "./models/JoinSessionPayload";
+import ISocketReceiver from "../ISocketReceiver.js";
+import { JoinSessionPayload } from "./models/JoinSessionPayload.js";
 
 class QueueSubscriberSocketReceiver implements ISocketReceiver {
     public MessageId: string;

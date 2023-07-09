@@ -3,8 +3,9 @@ import express from "express"
 import cors from "cors"
 import helmet from "helmet"
 import http from 'http'
+import socket from "./socket.js"
 
-import developerAuthRouter from "./auth/apple/developer/developer.controller"
+import developerAuthRouter from "./auth/apple/developer/developer.controller.js"
 
 dotenv.config();
 if (process.env.NODE_ENV === "local") {
@@ -33,8 +34,10 @@ app.use(express.json());
 app.use("/api/auth/apple/developer", developerAuthRouter);
 
 // Initialize web sockets for group sessions
-require('./socket').init(server); 
+socket.init(server); 
 
 server.listen(PORT, () => {
   console.log(`listening on *:${PORT}`);
 });
+
+export {}

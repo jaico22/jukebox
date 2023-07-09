@@ -28,3 +28,8 @@
     gap: 3em;
     align-items: center;
 }
+
+.logo {
+    width: 250px;
+    margin: 2em;
+}

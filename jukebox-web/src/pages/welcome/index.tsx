@@ -23,7 +23,7 @@ const WelcomePage = () => {
     return (
     <div className={styles.content}>
         <div className={styles.header}>
-            <h1>Harmoni</h1>
+            <img src="harmoni-logo.svg" className={styles.logo} />
         </div>
         <div className={styles.loginOptionsContainer}>
             <span><i>Select your platform to begin</i></span>

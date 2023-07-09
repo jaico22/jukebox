@@ -1,9 +1,7 @@
-import { Jwt, JwtPayload } from "jsonwebtoken";
-import { IDeveloperService } from "./ideveloperService.interface";
-import { DeveloperTokenResponse } from "./models/developerTokenResponse";
+import { IDeveloperService } from "./ideveloperService.interface.js";
+import { DeveloperTokenResponse } from "./models/developerTokenResponse.js";
 
-import fs = require('fs');
-import jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
         
 export class DeveloperService implements IDeveloperService {
     GenerateDeveloperToken(): DeveloperTokenResponse {
