@@ -26,9 +26,15 @@ const socket = {
 async function registerSocketReceivers(socket : Socket): Promise<void>
 {    
     for await (const file of getFiles('.')) {
-        if (file.endsWith('.socketReceiver.js') || file.endsWith('.socketReceiver.ts')) {
-          const receiver = (await import(file)) as ISocketReceiver;
-          socket.on(receiver.MessageId, (arg: any) => receiver.ReceiveMessage(socket, arg))
+        if (file.endsWith('.socketReceiver.ts')) {
+          try {
+            const receiver = (await import(file)) as ISocketReceiver;
+            socket.on(receiver.MessageId, (arg: any) => receiver.ReceiveMessage(socket, arg))
+          } catch (ex) {
+            // Ignore exceptions from trying to read typescript files. 
+            if (!file.endsWith('.ts'))
+                throw ex;
+          }
         }
     }
 }
