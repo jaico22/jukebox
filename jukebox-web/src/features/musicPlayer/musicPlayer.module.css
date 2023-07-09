@@ -1,6 +1,7 @@
 @import "./../../vars.css";
 
 .container {
+    min-width: 300px;
     flex-basis: 30%;
     display: flex;
     justify-content: center;

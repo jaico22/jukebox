@@ -1,10 +1,9 @@
-import { ISessionsService } from "./isessionsService.interface";
-
+import { ISessionsService } from "./isessionsService.interface.js";
+import socket from "../socket.js";
 export class SessionsService implements ISessionsService
 {
     DoesSessionExist(sessionId: string): boolean {
-        const io = require("../socket");
-        const room = io.getInstance().of("/").adapter.rooms.get(sessionId);    
+        const room = socket.getInstance().of("/").adapter.rooms.get(sessionId);    
         return room;
     }
 }

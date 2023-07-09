@@ -1,7 +1,7 @@
 import express from "express";
-import { ISessionsService } from "./isessionsService.interface";
-import { SessionsService } from "./sessions.service";
-import { GetSessionResponse } from "./models/getSessionResponse";
+import { ISessionsService } from "./isessionsService.interface.js";
+import { SessionsService } from "./sessions.service.js";
+import { GetSessionResponse } from "./models/getSessionResponse.js";
 
 const router = express.Router();
 

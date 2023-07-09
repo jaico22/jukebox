@@ -1,5 +1,6 @@
 .queueContainer {
     width: 100%;
+    min-width: 300px;
     display: flex;
     flex-direction: column;
     height: 100%;

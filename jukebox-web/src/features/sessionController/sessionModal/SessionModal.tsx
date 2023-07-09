@@ -8,6 +8,10 @@ import Input from "../../../components/input";
 import { useJukeBoxApi } from "../../../hooks/jukeBoxApi/useJukeBoxApi";
 import { apiRoutes } from "../../../hooks/jukeBoxApi/routes";
 import { GetSessionResponse } from "../../../hooks/jukeBoxApi/models/responses/getSessionRresponse";
+import Button from "../../../components/button";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../store";
+import { useGroupSession } from "../../groupSessions/hooks/useGroupSession";
 
 type SessionModalProps = {
     isOpen: boolean;
@@ -16,22 +20,24 @@ type SessionModalProps = {
 
 const SessionModal = (props : SessionModalProps) => {
     const [sessionIdField, setSessionIdField] = useState<string | null>();
-    const [sessionIdError, setSessionIdError] = useState<string | null>();
-    const [sessionIdVerified, setSessionIdVerified] = useState<boolean>(false);
     const [sessionIdInUse, setSessionIdInUse] = useState<boolean>(false);
-    
+    const sessionState = useSelector((state: RootState) => state.groupSession);
+    const dispatch = useDispatch();
+    const groupSession = useGroupSession();
+
     const api = useJukeBoxApi();
 
     const invalidEntryError = "This cannot be empty";
     const sessionIdInUseError = "SessionID in use"
 
     const saveSessionId = () => {
-        setSessionIdError(null);
         if (sessionIdField)
-            setSessionId(sessionIdField);
-        else
-            setSessionIdError(invalidEntryError);
+        {
+            groupSession?.joinSession(sessionIdField);
+            props.closeAction();
+        } 
     }
+
 
     const verifySessionId = (sessionId: string | undefined | null) => {
         if (sessionIdField)
@@ -47,8 +53,11 @@ const SessionModal = (props : SessionModalProps) => {
     useEffect(() => verifySessionId(sessionIdField), [sessionIdField])
 
     const isValid = !sessionIdInUse;
-    console.log(sessionIdInUse)
-    console.log(isValid)
+
+    let sessionIdErrors : string[] = [];
+    if (sessionIdInUse){
+        sessionIdErrors = sessionIdErrors.concat(sessionIdInUseError)
+    }
     return <Modal isOpen={props.isOpen} closeAction={props.closeAction}>
         <div>
             <h1>Session Controls</h1>
@@ -60,6 +69,7 @@ const SessionModal = (props : SessionModalProps) => {
                         value={sessionIdField ?? ""} 
                         className={styles.input}
                         setValue={(v) => setSessionIdField(v ?? "")} 
+                        errorMessages={sessionIdErrors}
                     />
                     {!isValid && sessionIdField && (<FontAwesomeIcon icon={faCircleExclamation} className={styles.error}/>)}
                     {isValid && sessionIdField && (<FontAwesomeIcon icon={faCircleCheck} className={styles.checkbox}/>)}
@@ -68,6 +78,7 @@ const SessionModal = (props : SessionModalProps) => {
                     <i>Hint: Try something unique, short and easy to remember. Like "BrandonsDrunkFuckup"</i>
                 </p>
             </div>
+            <Button disabled={!isValid || !sessionIdField} fontSize="1.5em" label={sessionState.isSessionActive ? "Save Changes" : "Start Session"} onClick={saveSessionId} />
         </div>
     </Modal>;
 }

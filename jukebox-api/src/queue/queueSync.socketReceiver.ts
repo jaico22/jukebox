@@ -1,6 +1,7 @@
 import { Socket } from "socket.io";
 import ISocketReceiver from "../ISocketReceiver.js";
 import { QueueSyncPayload } from "./models/QueueSyncPayload.js";
+import io from "../socket.js"
 
 class QueueSyncSocketReceiver implements ISocketReceiver {
     public MessageId: string;
@@ -10,9 +11,6 @@ class QueueSyncSocketReceiver implements ISocketReceiver {
     }
     
     ReceiveMessage = (socket: Socket, payload: QueueSyncPayload) => {
-        console.log('received')
-        console.log(payload)
-        const io = require("../socket");
         io.getInstance().to(payload.sessionId).emit("QueueUpdate", payload);
     }
 }

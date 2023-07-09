@@ -3,16 +3,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import styles from "./sessionController.module.css"
 import SessionModal from "./sessionModal/SessionModal"
+import { useSelector } from "react-redux"
+import { RootState } from "../../store"
 
 type SessionControllerProps = {
     className: string
 }
 
 const SessionController = (props: SessionControllerProps) => {
-    const [sessionActive, setSessionActive] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const sessionState = useSelector((state: RootState) => state.groupSession);
 
-    const className = `${props.className} ${sessionActive ? styles.active : ""}`;
+    const className = `${props.className} ${sessionState.isSessionActive ? styles.active : ""}`;
 
     return (<>
         <SessionModal isOpen={isModalOpen} closeAction={() => setIsModalOpen(false)} />

@@ -32,7 +32,7 @@ const MusicPlayer = () => {
     
     const nowplayingItem = musicPlayerState.nowPlaying ?? musicPlayerState.queue?.at(0);
 
-    const albumCoverUrl = nowplayingItem?.albumCoverUrl.replace('{w}', '600').replace('{h}', '600');
+    const albumCoverUrl = nowplayingItem?.albumCoverUrl?.replace('{w}', '600')?.replace('{h}', '600');
 
 
     return (<div className={styles.container}>

@@ -17,3 +17,11 @@
     margin-right: 0.5em;
     font-weight: bold;
 }
+.inputContainter {
+    display: flex;
+    flex-direction: row;
+}
+.error {
+    color: #ec0000;
+    margin: 0;
+}

@@ -1,6 +1,7 @@
 import { Socket } from "socket.io";
 import ISocketReceiver from "../ISocketReceiver.js";
 import { JoinSessionPayload } from "./models/JoinSessionPayload.js";
+import io from "../socket.js"
 
 class QueueSubscriberSocketReceiver implements ISocketReceiver {
     public MessageId: string;
@@ -10,9 +11,8 @@ class QueueSubscriberSocketReceiver implements ISocketReceiver {
     }
 
     ReceiveMessage = (socket: Socket, payload: JoinSessionPayload) => {
-        socket.join(`room-${payload.sessionId}`);
-        const io = require("../socket");
-        io.getInstance().to(payload.sessionId).emit("QueueSyncRequest", { sessionId: socket.id });
+        socket.join(payload.sessionId);
+        io.getInstance().to(payload.sessionId).emit("QueueSyncRequest", { sessionId: payload.sessionId });
     }
 }
 

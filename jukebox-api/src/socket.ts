@@ -26,9 +26,9 @@ const socket = {
 async function registerSocketReceivers(socket : Socket): Promise<void>
 {    
     for await (const file of getFiles('.')) {
-        if (file.endsWith('.socketReceiver.ts')) {
+        if (file.endsWith('.socketReceiver.ts') || file.endsWith('.socketReceiver.js')) {
           try {
-            const receiver = (await import(file)) as ISocketReceiver;
+            const receiver = (await import(file)).default as ISocketReceiver;
             socket.on(receiver.MessageId, (arg: any) => receiver.ReceiveMessage(socket, arg))
           } catch (ex) {
             // Ignore exceptions from trying to read typescript files. 

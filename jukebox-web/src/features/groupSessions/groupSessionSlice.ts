@@ -20,6 +20,7 @@ export const groupSessionSlice = createSlice({
     reducers: {
         setSessionId: (state, action: PayloadAction<string>) => {
             state.sessionId = action.payload
+            state.isSessionActive = true;
         },
         setIsConnected: (state, action: PayloadAction<boolean>) => {
             state.isConnected = action.payload;

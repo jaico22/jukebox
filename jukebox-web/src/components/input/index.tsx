@@ -9,6 +9,7 @@ type InputProps = {
     label?: string;
     id?:string;
     fontSize?: string;
+    errorMessages?: string[];
 }
 
 const Input = (props: InputProps) => {
@@ -17,14 +18,23 @@ const Input = (props: InputProps) => {
     if (props.fontSize) {
         inlineStyle.fontSize = props.fontSize
     }
-    return (<div><label className={styles.label} htmlFor={props.id}>{props.label}</label><input 
+
+    const errorMessage = () => {
+        return (<>{props.errorMessages?.forEach(error => {
+            return (<p className={styles.error}><i>{error}</i></p>)
+        })}</>);
+    }
+    return (<div className={styles.inputContainer}>
+        <label className={styles.label} htmlFor={props.id}>{props.label}</label>
+        <input 
         id={props.id}
         className={`${styles.input} ${props.className}`} 
         value={props.value ?? ""} 
         onChange={(e) => props.setValue(e.target.value)} 
         placeholder={props.placeholder}
-        style={inlineStyle}
-    /></div>)
+        style={inlineStyle} />
+        {errorMessage()}
+    </div>)
 }
 
 export default Input;
