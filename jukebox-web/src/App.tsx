@@ -7,6 +7,7 @@ import Player from './pages/player';
 import { MusicPlayerProvider } from './features/musicPlayer/MusicPlayerProvider';
 import { GroupSessionProvider } from './features/groupSessions/GroupSessionProvider';
 import GuestPage from './pages/guest';
+import MessageBar from './features/MessageBar';
 
 function App() {
   const router = createBrowserRouter([
@@ -27,6 +28,7 @@ function App() {
   return (
     <MusicPlayerProvider>
       <GroupSessionProvider>
+        <MessageBar />
         <RouterProvider router={router}></RouterProvider>   
       </GroupSessionProvider>
     </MusicPlayerProvider>
