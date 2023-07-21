@@ -5,4 +5,5 @@ export interface IGroupSession {
     addNextSong: (queuId: string, song: Song) => void;
     addLastSongSong: (queuId: string, song: Song) => void;
     joinSession: (sessionId: string) => void;
+    closeSession: () => void;
 }

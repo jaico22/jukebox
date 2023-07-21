@@ -128,6 +128,12 @@ const GroupSessionProvider = (props: GroupSessionProviderProps) => {
                 sessionId: sessionId
             });
             dispatch(setSessionId(sessionId));
+        },
+
+        closeSession: function () {
+            socket.emit("CloseSession", {
+                sessionId: sessionState.sessionId
+            });
         }
     }
     

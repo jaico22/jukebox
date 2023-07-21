@@ -49,7 +49,7 @@ const MusicPlayer = () => {
             <SessionController className={styles.control}/>
         </div>
 
-        <i>Group Session Id: {(groupSession?.groupSessionId)}</i>
+        {groupSession?.groupSessionId && (<i>Group Session Id: {(groupSession?.groupSessionId)}</i>)}
     </div>)
 }
 

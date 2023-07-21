@@ -10,6 +10,7 @@ type InputProps = {
     id?:string;
     fontSize?: string;
     errorMessages?: string[];
+    disabled?: boolean
 }
 
 const Input = (props: InputProps) => {
@@ -32,7 +33,8 @@ const Input = (props: InputProps) => {
         value={props.value ?? ""} 
         onChange={(e) => props.setValue(e.target.value)} 
         placeholder={props.placeholder}
-        style={inlineStyle} />
+        style={inlineStyle} 
+        disabled={props.disabled}/>
         {errorMessage()}
     </div>)
 }
