@@ -48,7 +48,7 @@ const SearchResults = (props: SearchModalProps) => {
             {props.results.map((result, index) => (
                 <div className={styles.searchResult} key={index}>
                     <b>{result.song.name} - {result.song.artist}</b>
-                    <div>
+                    <div className={styles.searchResultControls}>
                         <button className={styles.button} onClick={() => playNext(result.song)}>Play Next</button>
                         <button className={styles.button} onClick={() => playLast(result.song)}>Play Last</button>
                     </div>

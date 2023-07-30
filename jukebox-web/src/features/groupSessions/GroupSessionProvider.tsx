@@ -2,7 +2,7 @@ import { createContext, useEffect } from "react";
 import { IGroupSession } from "./models/IGroupSession";
 import { socket } from './../../socket'
 import { useDispatch, useSelector } from "react-redux";
-import { setIsConnected, setQueue } from "./groupSessionSlice";
+import { setIsConnected, setQueue, setSessionId } from "./groupSessionSlice";
 import { useMusicPlayer } from "../musicPlayer/hooks/useMusicPlayer";
 import { RootState } from "../../store";
 import { QueueSyncRequestPayload } from "./models/QueueSyncRequestPayload";
@@ -20,6 +20,23 @@ const GroupSessionProvider = (props: GroupSessionProviderProps) => {
     const dispatch = useDispatch();
     const musicPlayer = useMusicPlayer();
     const musicPlayerState = useSelector((state: RootState) => state.musicPlayer);
+    const sessionState = useSelector((state: RootState) => state.groupSession);
+
+    useEffect(() => {
+        (window as any).disconnectSession = () => {
+            if (!sessionState.isGuest && sessionState.sessionId) {
+                socket.emit("CloseSession", {
+                    sessionId: sessionState.sessionId
+                })        
+            }
+        }
+    }, [sessionState.sessionId, sessionState.isGuest])
+
+    useEffect(() => {
+        window.addEventListener("beforeunload", (e) => {
+            (window as any).disconnectSession();
+        }, false)
+    }, [])
 
     useEffect(() => {
         function onConnect() {
@@ -27,6 +44,11 @@ const GroupSessionProvider = (props: GroupSessionProviderProps) => {
         }
 
         function onDisconnect() {
+            if (!sessionState.isGuest) {
+                socket.emit("CloseSession", {
+                    sessionId: sessionState.sessionId
+                })
+            }
             dispatch(setIsConnected(false))
         }
 
@@ -52,12 +74,17 @@ const GroupSessionProvider = (props: GroupSessionProviderProps) => {
             dispatch(setQueue(payload.queue));
         }
 
+        function onSessionEnd() {
+            dispatch(setIsConnected(false));
+        }
+
         socket.on('connect', onConnect);
         socket.on('disconnect', onDisconnect);
         socket.on('NextSong', onNextSong);
         socket.on("QueueSyncRequest", onQueueSyncRequest);
         socket.on("QueueUpdate", onQueueUpdate);
         socket.on("LastSong", onLastSong);
+        socket.on("SessionEnded", onSessionEnd);
 
         socket.connect();
         
@@ -68,17 +95,19 @@ const GroupSessionProvider = (props: GroupSessionProviderProps) => {
             socket.off('QueueSyncRequest', onQueueSyncRequest);
             socket.off('QueueUpdate', onQueueUpdate);
             socket.off('LastSong', onLastSong);
+            socket.off('SessionEnded', onSessionEnd)
         };
     }, [dispatch, musicPlayer, musicPlayerState.queue]);
 
     useEffect(() => {
         socket.emit("QueueChange", {
+            sessionId: sessionState.sessionId,
             queue: musicPlayerState.queue
         })
     }, [musicPlayerState.queue])
 
     const groupSession: IGroupSession = {
-        groupSessionId: socket.id,
+        groupSessionId: sessionState.sessionId,
 
         addNextSong(queueId: string, song: Song) {
             socket.emit("QueueNext", {
@@ -92,6 +121,19 @@ const GroupSessionProvider = (props: GroupSessionProviderProps) => {
                 queueId: queueId,
                 song: song
             } as QueueSongPayload);
+        },
+
+        joinSession: function(sessionId: string) {
+            socket.emit("JoinSession", {
+                sessionId: sessionId
+            });
+            dispatch(setSessionId(sessionId));
+        },
+
+        closeSession: function () {
+            socket.emit("CloseSession", {
+                sessionId: sessionState.sessionId
+            });
         }
     }
     

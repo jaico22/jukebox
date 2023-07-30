@@ -1,6 +1,7 @@
 import { Socket } from "socket.io";
 import ISocketReceiver from "../ISocketReceiver.js";
 import { QueueSongPayload } from "./models/QueueSongPayload.js";
+import io from "../socket.js"
 
 class QueueNextSocketReceiver implements ISocketReceiver {
     MessageId: string;
@@ -10,8 +11,6 @@ class QueueNextSocketReceiver implements ISocketReceiver {
     }
 
     ReceiveMessage(socket: Socket, payload: QueueSongPayload) {
-        console.log(payload)
-        const io = require("../socket");
         io.getInstance().to(payload.queueId).emit("NextSong", payload.song.id);       
     };
 }

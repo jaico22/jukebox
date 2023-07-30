@@ -48,10 +48,8 @@
     border: 0px;
     width: 100%;
     max-width: 900px;
-    margin-left: 1em;
     border-radius: 1em;
     top: 0;
-    padding: 1em;
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -76,4 +74,11 @@
 
 .searchResultModal {
     position: relative;
+}
+
+.searchResultControls {
+    min-width: 200px;
+    display: flex;
+    justify-content: right;
+    margin-right: 1em;
 }

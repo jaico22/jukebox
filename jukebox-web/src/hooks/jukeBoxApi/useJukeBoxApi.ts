@@ -11,8 +11,17 @@ export function useJukeBoxApi(): JukeBoxApi {
             data: resp.data
         }
     }
+    
+    const get = async function <T>(route: string): Promise<JukeBoxApiResponse<T>> {
+        var resp = await axios.get<T>(`${baseUrl}/${route}`);
+        return {
+            statusCode: resp.status,
+            data: resp.data
+        }
+    }
 
     return {
-        Post: post
+        Post: post,
+        Get: get
     };
 }
